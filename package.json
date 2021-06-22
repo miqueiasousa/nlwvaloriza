@@ -6,7 +6,8 @@
   "author": "Miqueias Sousa <miqueiassousa80@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node-dev --respawn --transpile-only src/index.ts"
+    "start": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "typeorm": "ts-node-dev node_modules/typeorm/cli.js"
   },
   "devDependencies": {
     "@types/express": "^4.17.12",
