@@ -17,7 +17,7 @@ export class CreateUserService {
       throw new Error('User already exists')
     }
 
-    const user = usersRepository.create({ name, email, admin })
+    const user = usersRepository.createWithUUID({ name, email, admin })
 
     await usersRepository.save(user)
 
