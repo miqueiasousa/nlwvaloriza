@@ -11,10 +11,11 @@ interface IUserRequest {
 }
 
 export class CreateUserService {
-  async execute ({ name, email, password, admin }: IUserRequest) {
+  async execute ({ name, email, password, admin = false }: IUserRequest) {
     const SALT_ROUNDS = 8
 
     const usersRepository = getCustomRepository(UsersRepository)
+
     const isUserAlreadyExists = !!await usersRepository.findOne({ email })
 
     if (isUserAlreadyExists) {
