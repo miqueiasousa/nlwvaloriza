@@ -15,7 +15,7 @@ const createComplimentController = new CreateComplimentController()
 
 router.post('/', authenticateUserController.handle)
 router.post('/users', ensureAdmin, createUserController.handle)
-router.post('/tags', createTagController.handle)
+router.post('/tags', ensureAdmin, createTagController.handle)
 router.post('/compliments', createComplimentController.handle)
 
 export { router }
