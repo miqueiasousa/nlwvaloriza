@@ -28,9 +28,7 @@ router.post('/tags', ensureAuthenticated, ensureAdmin, createTagController.handl
 router.get('/user/compliments/send', ensureAuthenticated, listUserSendComplimentsController.handle)
 router.get('/user/compliments/receive', ensureAuthenticated, listUserReceiveComplimentsController.handle)
 
-router.use(ensureAuthenticated)
-
-router.post('/users', ensureAdmin, createUserController.handle)
-router.post('/compliments', createComplimentController.handle)
+router.post('/users', ensureAuthenticated, ensureAdmin, createUserController.handle)
+router.post('/compliments', ensureAuthenticated, createComplimentController.handle)
 
 export { router }
