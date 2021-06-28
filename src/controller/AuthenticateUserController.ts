@@ -8,8 +8,8 @@ export class AuthenticateUserController {
 
     const authenticateUserService = new AuthenticateUserService()
 
-    const token = await authenticateUserService.execute({ email, password })
+    const { user, token } = await authenticateUserService.execute({ email, password })
 
-    return res.status(200).json({ token })
+    return res.status(200).json({ user, token })
   }
 }

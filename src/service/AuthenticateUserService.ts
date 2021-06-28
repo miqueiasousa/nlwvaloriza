@@ -36,6 +36,6 @@ export class AuthenticateUserService {
       }
     )
 
-    return token
+    return { user, token }
   }
 }
