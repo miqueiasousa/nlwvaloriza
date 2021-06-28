@@ -25,16 +25,11 @@ export class AuthenticateUserService {
       throw new Error('Email/Password incorrect')
     }
 
-    const token = sign(
-      {
-        email: user.email
-      },
-      'DOGECOIN',
-      {
-        subject: user.id,
-        expiresIn: '1d'
-      }
-    )
+    const expiresIn = Math.floor(Date.now() / 1000) + (60 * 60 * 24)
+    const token = sign({
+      sub: user.id,
+      exp: expiresIn
+    }, 'DOGECOIN')
 
     return { user, token }
   }
