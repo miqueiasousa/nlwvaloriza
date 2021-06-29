@@ -5,7 +5,7 @@ import { Compliment } from '../entity/Compliment'
 
 @EntityRepository(Compliment)
 export class ComplimentsRepository extends Repository<Compliment> {
-  createWithUUID (entity: DeepPartial<Compliment>) {
+  createAndGenUUID (entity: DeepPartial<Compliment>) {
     entity.id = uuid()
 
     return this.create(entity)

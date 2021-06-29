@@ -25,7 +25,7 @@ export class CreateComplimentService {
       throw new Error('User receiver does not exists')
     }
 
-    const compliment = complimentsRepository.createWithUUID({ tag_id, user_sender, user_receiver, message })
+    const compliment = complimentsRepository.createAndGenUUID({ tag_id, user_sender, user_receiver, message })
 
     await complimentsRepository.save(compliment)
 

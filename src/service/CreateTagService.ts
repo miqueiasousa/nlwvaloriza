@@ -12,7 +12,7 @@ export class CreateTagService {
       throw new Error('Tag already exists')
     }
 
-    const tag = tagsRepository.createWithUUID({ name })
+    const tag = tagsRepository.createAndGenUUID({ name })
 
     await tagsRepository.save(tag)
 

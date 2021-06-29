@@ -5,7 +5,7 @@ import { User } from '../entity/User'
 
 @EntityRepository(User)
 export class UsersRepository extends Repository<User> {
-  createWithUUID (entity: DeepPartial<User>) {
+  createAndGenUUID (entity: DeepPartial<User>) {
     entity.id = uuid()
 
     return this.create(entity)

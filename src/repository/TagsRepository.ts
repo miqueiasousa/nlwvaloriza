@@ -5,7 +5,7 @@ import { Tag } from '../entity/Tag'
 
 @EntityRepository(Tag)
 export class TagsRepository extends Repository<Tag> {
-  createWithUUID (entity: DeepPartial<Tag>) {
+  createAndGenUUID (entity: DeepPartial<Tag>) {
     entity.id = uuid()
 
     return this.create(entity)
