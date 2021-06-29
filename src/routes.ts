@@ -13,6 +13,7 @@ import { validation } from './middleware/validation'
 import authenticateUserSchema from './schema/authenticate-user-schema.json'
 import createUserSchema from './schema/create-user-schema.json'
 import createTagSchema from './schema/create-tag-schema.json'
+import createComplimentSchema from './schema/create-compliment-schema.json'
 
 const router = Router()
 
@@ -33,6 +34,6 @@ router.get('/user/compliments/send', ensureAuthenticated, listUserSendCompliment
 router.get('/user/compliments/receive', ensureAuthenticated, listUserReceiveComplimentsController.handle)
 
 router.post('/users', validation(createUserSchema), ensureAuthenticated, ensureAdmin, createUserController.handle)
-router.post('/compliments', ensureAuthenticated, createComplimentController.handle)
+router.post('/compliments', validation(createComplimentSchema), ensureAuthenticated, createComplimentController.handle)
 
 export { router }
