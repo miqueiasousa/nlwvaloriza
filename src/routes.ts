@@ -11,6 +11,7 @@ import { ensureAdmin } from './middleware/ensureAdmin'
 import { ensureAuthenticated } from './middleware/ensureAuthenticated'
 import { validation } from './middleware/validation'
 import authenticateUserSchema from './schema/authenticate-user-schema.json'
+import createUserSchema from './schema/create-user-schema.json'
 
 const router = Router()
 
@@ -30,7 +31,7 @@ router.post('/tags', ensureAuthenticated, ensureAdmin, createTagController.handl
 router.get('/user/compliments/send', ensureAuthenticated, listUserSendComplimentsController.handle)
 router.get('/user/compliments/receive', ensureAuthenticated, listUserReceiveComplimentsController.handle)
 
-router.post('/users', ensureAuthenticated, ensureAdmin, createUserController.handle)
+router.post('/users', validation(createUserSchema), ensureAuthenticated, ensureAdmin, createUserController.handle)
 router.post('/compliments', ensureAuthenticated, createComplimentController.handle)
 
 export { router }
