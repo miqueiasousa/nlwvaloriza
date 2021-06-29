@@ -25,15 +25,45 @@ const listTagsController = new ListTagsController()
 const listUserSendComplimentsController = new ListUserSendComplimentsController()
 const listUserReceiveComplimentsController = new ListUserReceiveComplimentsController()
 
-router.post('/', validation(authenticateUserSchema), authenticateUserController.handle)
+router.post(
+  '/',
+  validation(authenticateUserSchema),
+  authenticateUserController.handle
+)
+
+router.post(
+  '/users',
+  validation(createUserSchema),
+  ensureAuthenticated,
+  ensureAdmin,
+  createUserController.handle
+)
+
+router.get(
+  '/user/compliments/send',
+  ensureAuthenticated,
+  listUserSendComplimentsController.handle
+)
+router.get(
+  '/user/compliments/receive',
+  ensureAuthenticated,
+  listUserReceiveComplimentsController.handle
+)
 
 router.get('/tags', listTagsController.handle)
-router.post('/tags', validation(createTagSchema), ensureAuthenticated, ensureAdmin, createTagController.handle)
+router.post(
+  '/tags',
+  validation(createTagSchema),
+  ensureAuthenticated,
+  ensureAdmin,
+  createTagController.handle
+)
 
-router.get('/user/compliments/send', ensureAuthenticated, listUserSendComplimentsController.handle)
-router.get('/user/compliments/receive', ensureAuthenticated, listUserReceiveComplimentsController.handle)
-
-router.post('/users', validation(createUserSchema), ensureAuthenticated, ensureAdmin, createUserController.handle)
-router.post('/compliments', validation(createComplimentSchema), ensureAuthenticated, createComplimentController.handle)
+router.post(
+  '/compliments',
+  validation(createComplimentSchema),
+  ensureAuthenticated,
+  createComplimentController.handle
+)
 
 export { router }
