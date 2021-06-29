@@ -1,0 +1,17 @@
+{
+  "type": "object",
+  "properties": {
+    "tag_id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "user_receiver": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "message": {
+      "type": "string"
+    }
+  },
+  "required": ["tag_id", "user_receiver", "message"]
+}
