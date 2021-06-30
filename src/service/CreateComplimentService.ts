@@ -2,6 +2,7 @@ import { getCustomRepository } from 'typeorm'
 
 import { ComplimentsRepository } from '../repository/ComplimentsRepository'
 import { UsersRepository } from '../repository/UsersRepository'
+import { BadRequest, NotFound } from '../core/ApiError'
 
 interface IComplimentRequest {
   tag_id: string
@@ -16,13 +17,13 @@ export class CreateComplimentService {
     const usersRepository = getCustomRepository(UsersRepository)
 
     if (user_sender === user_receiver) {
-      throw new Error('Incorrect user receiver')
+      throw new BadRequest()
     }
 
     const isUserReceiverExists = !!await usersRepository.findOne(user_receiver)
 
     if (!isUserReceiverExists) {
-      throw new Error('User receiver does not exists')
+      throw new NotFound()
     }
 
     const compliment = complimentsRepository.createAndGenUUID({ tag_id, user_sender, user_receiver, message })

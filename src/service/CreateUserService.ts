@@ -2,6 +2,7 @@ import { getCustomRepository } from 'typeorm'
 import { hash } from 'bcrypt'
 
 import { UsersRepository } from '../repository/UsersRepository'
+import { BadRequest } from '../core/ApiError'
 
 interface IUserRequest {
   name: string
@@ -19,7 +20,7 @@ export class CreateUserService {
     const isUserAlreadyExists = !!await usersRepository.findOne({ email })
 
     if (isUserAlreadyExists) {
-      throw new Error('User already exists')
+      throw new BadRequest()
     }
 
     const passwordHash = await hash(password, SALT_ROUNDS)

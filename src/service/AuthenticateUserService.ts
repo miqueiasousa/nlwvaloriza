@@ -3,6 +3,7 @@ import { compare } from 'bcrypt'
 import { sign } from 'jsonwebtoken'
 
 import { UsersRepository } from '../repository/UsersRepository'
+import { Unauthorized } from '../core/ApiError'
 
 interface IAuthenticateRequest {
   email: string
@@ -16,13 +17,13 @@ export class AuthenticateUserService {
     const user = await usersRepository.findOne({ email })
 
     if (!user) {
-      throw new Error('Email/Password incorrect')
+      throw new Unauthorized('Bad Credentials')
     }
 
     const isPasswordSame = await compare(password, user.password)
 
     if (!isPasswordSame) {
-      throw new Error('Email/Password incorrect')
+      throw new Unauthorized('Bad Credentials')
     }
 
     const expiresIn = Math.floor(Date.now() / 1000) + (60 * 60 * 24)
