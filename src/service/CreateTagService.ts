@@ -13,7 +13,7 @@ export class CreateTagService {
       throw new BadRequest()
     }
 
-    const tag = tagsRepository.createAndGenUUID({ name })
+    const tag = tagsRepository.create({ name })
 
     await tagsRepository.save(tag)
 

@@ -29,7 +29,7 @@ export class CreateComplimentService {
       throw new NotFound()
     }
 
-    const compliment = complimentsRepository.createAndGenUUID({ tag_id, user_sender, user_receiver, message })
+    const compliment = complimentsRepository.create({ tag_id, user_sender, user_receiver, message })
 
     await complimentsRepository.save(compliment)
 

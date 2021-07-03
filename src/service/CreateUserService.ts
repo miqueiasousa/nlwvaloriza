@@ -25,7 +25,7 @@ export class CreateUserService {
 
     const passwordHash = await hash(password, SALT_ROUNDS)
 
-    const user = usersRepository.createAndGenUUID({
+    const user = usersRepository.create({
       name,
       email,
       password: passwordHash,
