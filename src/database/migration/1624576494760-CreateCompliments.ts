@@ -9,7 +9,8 @@ export class CreateCompliments1624576494760 implements MigrationInterface {
           {
             name: 'id',
             type: 'uuid',
-            isPrimary: true
+            isPrimary: true,
+            default: 'uuid_generate_v4()'
           },
           {
             name: 'user_sender',

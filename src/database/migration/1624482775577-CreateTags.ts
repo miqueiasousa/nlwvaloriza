@@ -9,7 +9,8 @@ export class CreateTags1624482775577 implements MigrationInterface {
           {
             name: 'id',
             type: 'uuid',
-            isPrimary: true
+            isPrimary: true,
+            default: 'uuid_generate_v4()'
           },
           {
             name: 'name',
