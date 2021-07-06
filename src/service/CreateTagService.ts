@@ -1,7 +1,7 @@
 import { getCustomRepository } from 'typeorm'
 
 import { TagsRepository } from '../repository/TagsRepository'
-import { BadRequest } from '../core/ApiError'
+import { Conflict } from '../core/ApiError'
 
 export class CreateTagService {
   async execute (name: string) {
@@ -10,7 +10,7 @@ export class CreateTagService {
     const isTagAlreadyExists = !!await tagsRepository.findOne({ name })
 
     if (isTagAlreadyExists) {
-      throw new BadRequest()
+      throw new Conflict()
     }
 
     const tag = tagsRepository.create({ name })
