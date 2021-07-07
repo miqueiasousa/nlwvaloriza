@@ -1,10 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, JoinColumn, ManyToOne } from 'typeorm'
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, JoinColumn, ManyToOne, BaseEntity } from 'typeorm'
 
 import { Tag } from './Tag'
 import { User } from './User'
 
 @Entity('compliments')
-export class Compliment {
+export class Compliment extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
