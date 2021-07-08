@@ -1,8 +1,7 @@
-import { getCustomRepository } from 'typeorm'
 import { compare } from 'bcrypt'
 import { sign } from 'jsonwebtoken'
 
-import { UsersRepository } from '../repository/UsersRepository'
+import { User } from '../model/User'
 import { Unauthorized } from '../core/ApiError'
 
 interface IAuthenticateRequest {
@@ -12,9 +11,7 @@ interface IAuthenticateRequest {
 
 export class AuthenticateUserService {
   async execute ({ email, password }: IAuthenticateRequest) {
-    const usersRepository = getCustomRepository(UsersRepository)
-
-    const user = await usersRepository.findOne({ email })
+    const user = await User.findOne({ email })
 
     if (!user) {
       throw new Unauthorized('Bad Credentials')

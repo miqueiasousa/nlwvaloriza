@@ -1,7 +1,6 @@
-import { getCustomRepository } from 'typeorm'
 import { hash } from 'bcrypt'
 
-import { UsersRepository } from '../repository/UsersRepository'
+import { User } from '../model/User'
 import { Conflict } from '../core/ApiError'
 
 interface IUserRequest {
@@ -15,9 +14,7 @@ export class CreateUserService {
   async execute ({ name, email, password, admin = false }: IUserRequest) {
     const SALT_ROUNDS = 8
 
-    const usersRepository = getCustomRepository(UsersRepository)
-
-    const isUserAlreadyExists = !!await usersRepository.findOne({ email })
+    const isUserAlreadyExists = !!await User.findOne({ email })
 
     if (isUserAlreadyExists) {
       throw new Conflict()
@@ -25,14 +22,14 @@ export class CreateUserService {
 
     const passwordHash = await hash(password, SALT_ROUNDS)
 
-    const user = usersRepository.create({
-      name,
-      email,
-      password: passwordHash,
-      admin
-    })
+    const user = new User()
 
-    await usersRepository.save(user)
+    user.name = name
+    user.email = email
+    user.password = passwordHash
+    user.admin = admin
+
+    await user.save()
 
     return user
   }
