@@ -1,12 +1,8 @@
-import { getCustomRepository } from 'typeorm'
-
-import { TagsRepository } from '../repository/TagsRepository'
+import { Tag } from '../model/Tag'
 
 export class ListTagsService {
   async execute () {
-    const tagsRepository = getCustomRepository(TagsRepository)
-
-    const tags = await tagsRepository.find()
+    const tags = await Tag.find()
 
     return tags
   }

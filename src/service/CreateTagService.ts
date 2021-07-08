@@ -1,21 +1,19 @@
-import { getCustomRepository } from 'typeorm'
-
-import { TagsRepository } from '../repository/TagsRepository'
+import { Tag } from '../model/Tag'
 import { Conflict } from '../core/ApiError'
 
 export class CreateTagService {
   async execute (name: string) {
-    const tagsRepository = getCustomRepository(TagsRepository)
-
-    const isTagAlreadyExists = !!await tagsRepository.findOne({ name })
+    const isTagAlreadyExists = !!await Tag.findOne({ name })
 
     if (isTagAlreadyExists) {
       throw new Conflict()
     }
 
-    const tag = tagsRepository.create({ name })
+    const tag = new Tag()
 
-    await tagsRepository.save(tag)
+    tag.name = name
+
+    await tag.save()
 
     return tag
   }
