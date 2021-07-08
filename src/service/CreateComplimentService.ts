@@ -1,6 +1,4 @@
-import { getCustomRepository } from 'typeorm'
-
-import { ComplimentsRepository } from '../repository/ComplimentsRepository'
+import { Compliment } from '../model/Compliment'
 import { Tag } from '../model/Tag'
 import { User } from '../model/User'
 import { BadRequest, NotFound } from '../core/ApiError'
@@ -14,8 +12,6 @@ interface IComplimentRequest {
 
 export class CreateComplimentService {
   async execute ({ tag_id, user_sender, user_receiver, message }: IComplimentRequest) {
-    const complimentsRepository = getCustomRepository(ComplimentsRepository)
-
     if (user_sender === user_receiver) {
       throw new BadRequest()
     }
@@ -27,9 +23,14 @@ export class CreateComplimentService {
       throw new NotFound()
     }
 
-    const compliment = complimentsRepository.create({ tag_id, user_sender, user_receiver, message })
+    const compliment = new Compliment()
 
-    await complimentsRepository.save(compliment)
+    compliment.tag_id = tag_id
+    compliment.user_sender = user_sender
+    compliment.user_receiver = user_receiver
+    compliment.message = message
+
+    await compliment.save()
 
     return compliment
   }
