@@ -7,6 +7,7 @@ import { CreateComplimentController } from './controller/CreateComplimentControl
 import { ListTagsController } from './controller/ListTagsController'
 import { ListUserSendComplimentsController } from './controller/ListUserSendComplimentsController'
 import { ListUserReceiveComplimentsController } from './controller/ListUserReceiveComplimentsController'
+import { SetAUserAsAdminController } from './controller/SetAUserAsAdminController'
 import { ensureAdmin } from './middleware/ensureAdmin'
 import { ensureAuthenticated } from './middleware/ensureAuthenticated'
 import { validation } from './middleware/validation'
@@ -24,6 +25,7 @@ const createComplimentController = new CreateComplimentController()
 const listTagsController = new ListTagsController()
 const listUserSendComplimentsController = new ListUserSendComplimentsController()
 const listUserReceiveComplimentsController = new ListUserReceiveComplimentsController()
+const setAUserAsAdminController = new SetAUserAsAdminController()
 
 router.post(
   '/',
@@ -35,6 +37,13 @@ router.post(
   '/users',
   validation(createUserSchema),
   createUserController.handle
+)
+
+router.put(
+  '/users/:id/admin',
+  ensureAuthenticated,
+  ensureAdmin,
+  setAUserAsAdminController.handle
 )
 
 router.get(
