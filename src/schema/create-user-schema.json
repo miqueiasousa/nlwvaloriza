@@ -10,9 +10,6 @@
     },
     "password": {
       "type": "string"
-    },
-    "admin": {
-      "type": "boolean"
     }
   },
   "required": ["name", "email", "password"]
