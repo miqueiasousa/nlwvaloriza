@@ -7,11 +7,10 @@ interface IUserRequest {
   name: string
   email: string
   password: string
-  admin?: boolean
 }
 
 export class CreateUserService {
-  async execute ({ name, email, password, admin = false }: IUserRequest) {
+  async execute ({ name, email, password }: IUserRequest) {
     const SALT_ROUNDS = 8
 
     const isUserAlreadyExists = !!await User.findOne({ email })
@@ -27,7 +26,7 @@ export class CreateUserService {
     user.name = name
     user.email = email
     user.password = passwordHash
-    user.admin = admin
+    user.admin = false
 
     await user.save()
 
