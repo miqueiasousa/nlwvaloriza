@@ -34,8 +34,6 @@ router.post(
 router.post(
   '/users',
   validation(createUserSchema),
-  ensureAuthenticated,
-  ensureAdmin,
   createUserController.handle
 )
 
