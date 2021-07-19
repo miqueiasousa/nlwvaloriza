@@ -23,10 +23,12 @@ export class CreateUserService {
 
     const user = new User()
 
-    user.name = name
-    user.email = email
-    user.password = passwordHash
-    user.admin = false
+    Object.assign(user, {
+      name,
+      email,
+      password: passwordHash,
+      admin: false
+    })
 
     await user.save()
 

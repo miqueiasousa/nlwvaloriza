@@ -25,10 +25,7 @@ export class CreateComplimentService {
 
     const compliment = new Compliment()
 
-    compliment.tag_id = tag_id
-    compliment.user_sender = user_sender
-    compliment.user_receiver = user_receiver
-    compliment.message = message
+    Object.assign(compliment, { tag_id, user_sender, user_receiver, message })
 
     await compliment.save()
 

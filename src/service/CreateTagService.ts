@@ -11,7 +11,7 @@ export class CreateTagService {
 
     const tag = new Tag()
 
-    tag.name = name
+    Object.assign(tag, { name })
 
     await tag.save()
 
