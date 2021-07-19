@@ -26,7 +26,7 @@ export class NotFound extends ApiError {
 }
 
 export class Conflict extends ApiError {
-  constructor (message = 'Not Found') {
+  constructor (message = 'Conflict') {
     super(409, message)
   }
 }
