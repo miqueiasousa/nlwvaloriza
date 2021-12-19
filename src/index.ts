@@ -20,3 +20,11 @@ app.use(router)
 app.use(errorHandler)
 
 app.listen(PORT, () => console.log(`🔥 Listening on port ${PORT}`))
+
+// [x] usar dotenv
+// [x] criar usuario passando name, email e password
+// [x] permitir criação de usuário sem autenticação
+// [x] criar rota /user/:id/admin onde um admin autenticado pode atualizar um usuario
+// [ ] confirmação de email
+// [ ] recuperar/redefinir senha
+// [ ] implementar redis para armazenar user:token (usar para refresh tokens e melhorar segurança)

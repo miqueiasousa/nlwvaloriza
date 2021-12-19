@@ -10,6 +10,8 @@ export class CreateUserController {
 
     const user = await createUserService.execute({ name, email, password })
 
+    delete user.password
+
     return res.status(201).json(user)
   }
 }

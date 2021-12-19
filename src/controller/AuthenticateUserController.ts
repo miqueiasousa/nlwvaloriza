@@ -10,6 +10,8 @@ export class AuthenticateUserController {
 
     const { user, token } = await authenticateUserService.execute({ email, password })
 
+    delete user.password
+
     return res.status(200).json({ user, token })
   }
 }
